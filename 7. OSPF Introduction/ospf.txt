@@ -1,0 +1,95 @@
+Setting routeing protocol 
+
+那你看你要不要照拉吧~!
+
+首先，路由器是負責尋找路徑；這樣他收到封包時，才能夠送達目的地。
+
+把路由器想城市各地郵局。我住鳳山區，一定是投給鳳山區的郵局吧?(沒人會這麼閒跑去其他地方吧...)
+
+設:Router = post office
+
+假如我要寄信給北部的朋友，那一定是丟給鳳山郵局，他們會想辦法送到北部某個區的郵局，然後再送到我朋友手上
+
+所以當地這一區的郵局，一定都對當地的路都非常的熟知。但如果要送去別區的話，他們並不會曉得怎麼走。這是後就是轉交給別區的郵局，讓他們專業的來處理這封郵件。
+
+但郵局跟郵局之間，總是需要有聯絡吧?所以就會想個溝通方式，那麼那個溝通方式就是"路由協定"
+
+了解吧?
+
+其實還有其他的路由協定
+
+但你們只要學會
+Rip Ospf Eigrp
+
+那rip上學期已經學過了
+
+還記得他是如何運作的嗎？
+
+我是指rip唷
+
+那我還是在跟你複習一次吧!
+
+rip是看路由器的個數，就像是TTL一樣
+
+而RIP基本只能紀錄到15個點，在下去他就看不到了
+
+OK？
+
+Rip v1 = classful
+Rip v2 = calssless
+
+那繼續吧
+
+你們應該都自己有去看過Ospf，那麼他主要有分區域
+
+network address wildcard mask area number 
+
+network 192.168.0.0 0.0.0.255 area 1
+
+address = 網段IP
+wildcard mask = 放行數
+number = 區域編號
+
+OK？
+
+Router(config)#router ospf number 
+
+number = 概念算是標籤
+number可以隨意設定數值
+<1-65535>  Process ID
+
+OSPF process 1 cannot start. There must be at least one "up" IP interface
+
+因為我並沒有設定介面的ip，所以他告訴我不能使用
+
+Router(config)#router ospf 1
+Router(config-router)#
+
+隨時要注意自己的階層
+
+現在在config-router
+設定組態檔的路由設定
+
+Router(config-router)#network 192.168.0.0 0.0.0.255 area 1
+Router(config-router)#
+
+於是這樣就宣告出去了
+
+show running-config
+
+router ospf 1
+ log-adjacency-changes
+ network 192.168.0.0 0.0.0.255 area 1
+!
+
+會看到剛剛設定的路由協定
+
+那路由協定如何設定
+↓
+OSPF只需要把自己附近的路宣告進去就好
+
+就像是郵局，都會有當地大大小小的路
+OK?
+
+
+
